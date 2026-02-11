@@ -6,6 +6,7 @@
 
 #include <memory>
 #include "Common/ResizeCtrl.h"
+#include "Common/CStatic/SCStatic/SCStatic.h"
 #include "Common/CEdit/SCEdit/SCEdit.h"
 #include "Common/CComboBox/SCComboBox/SCComboBox.h"
 #include "Common/directx/CSCD2Context/SCD2Context.h"
@@ -78,4 +79,5 @@ public:
 	CSCSliderCtrl m_slider_font_size;
 	CSCComboBox m_combo_back_image;
 	afx_msg void OnCbnSelchangeComboBackImage();
+	CSCStatic m_static_font_size;
 };

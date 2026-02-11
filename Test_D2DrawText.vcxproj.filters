@@ -63,6 +63,9 @@
     <ClInclude Include="..\..\Common\CSliderCtrl\SCSliderCtrl\SCSliderCtrl.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Common\CStatic\SCStatic\SCStatic.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test_D2DrawText.cpp">
@@ -99,6 +102,9 @@
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Common\CSliderCtrl\SCSliderCtrl\SCSliderCtrl.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\CStatic\SCStatic\SCStatic.cpp">
       <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>

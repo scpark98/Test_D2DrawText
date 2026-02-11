@@ -68,6 +68,7 @@ void CTestD2DrawTextDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STATIC_TEXT_AREA, m_static_text_area);
 	DDX_Control(pDX, IDC_SLIDER_FONT_SIZE, m_slider_font_size);
 	DDX_Control(pDX, IDC_COMBO_BACK_IMAGE, m_combo_back_image);
+	DDX_Control(pDX, IDC_STATIC_FONT_SIZE, m_static_font_size);
 }
 
 BEGIN_MESSAGE_MAP(CTestD2DrawTextDlg, CDialogEx)
@@ -136,10 +137,21 @@ BOOL CTestD2DrawTextDlg::OnInitDialog()
 
 	m_combo_font.set_as_font_combo();
 	m_combo_font.set_line_height(14);
+	CString font_name = theApp.GetProfileString(_T("setting"), _T("font name"), _T("맑은 고딕"));
+	m_combo_font.SelectString(-1, font_name);
+
+	int font_size = theApp.GetProfileInt(_T("setting"), _T("font size"), 48);
+	m_static_font_size.set_use_edit();
+	m_static_font_size.set_text_value(_T("%d"), font_size);
 
 	m_slider_font_size.set_style(CSCSliderCtrl::style_thumb_round);
 	m_slider_font_size.set_range(4, 400);
-	m_slider_font_size.set_pos(theApp.GetProfileInt(_T("setting"), _T("font size"), 20));
+	m_slider_font_size.set_pos(font_size);
+
+	m_show_text = theApp.GetProfileInt(_T("setting"), _T("show text"), true);
+	m_show_shadow = theApp.GetProfileInt(_T("setting"), _T("show shadow"), true);
+	m_check_show_text.SetCheck(m_show_text ? BST_CHECKED : BST_UNCHECKED);
+	m_check_show_shadow.SetCheck(m_show_shadow ? BST_CHECKED : BST_UNCHECKED);
 
 	m_align = theApp.GetProfileInt(_T("setting"), _T("align"), DT_CENTER);
 	m_valign = theApp.GetProfileInt(_T("setting"), _T("valign"), DT_VCENTER);
@@ -240,7 +252,7 @@ void CTestD2DrawTextDlg::OnPaint()
 
 		draw_rect(d2dc, m_text_area, Gdiplus::Color::DimGray);
 
-		m_text_rect = draw_text(d2dc, m_text_area, m_edit_text.get_text(), m_combo_font.get_text(), (float)m_slider_font_size.GetPos(), DWRITE_FONT_WEIGHT_NORMAL, Gdiplus::Color::Red, Gdiplus::Color::Black, m_align | m_valign, m_show_text, m_show_shadow);
+		m_text_rect = draw_text(d2dc, m_text_area, m_edit_text.get_text(), m_combo_font.get_cur_sel_text(), (float)m_slider_font_size.GetPos(), DWRITE_FONT_WEIGHT_NORMAL, Gdiplus::Color::Red, Gdiplus::Color::Black, m_align | m_valign, m_show_text, m_show_shadow);
 		draw_rect(d2dc, m_text_rect, Gdiplus::Color::Red);
 
 		HRESULT hr = d2dc->EndDraw();
@@ -260,8 +272,6 @@ HCURSOR CTestD2DrawTextDlg::OnQueryDragIcon()
 
 void CTestD2DrawTextDlg::OnBnClickedOk()
 {
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CDialogEx::OnOK();
 }
 
 void CTestD2DrawTextDlg::OnBnClickedCancel()
@@ -285,18 +295,23 @@ void CTestD2DrawTextDlg::OnEnChangeEditText()
 
 void CTestD2DrawTextDlg::OnCbnSelchangeComboFont()
 {
+	CString font_name = m_combo_font.get_cur_sel_text();
+	trace(font_name);
+	theApp.WriteProfileString(_T("setting"), _T("font name"), font_name);
 	Invalidate();
 }
 
 void CTestD2DrawTextDlg::OnBnClickedCheckShowText()
 {
 	m_show_text = (m_check_show_text.GetCheck() == BST_CHECKED);
+	theApp.WriteProfileInt(_T("setting"), _T("show text"), m_show_text);
 	Invalidate();
 }
 
 void CTestD2DrawTextDlg::OnBnClickedCheckShowShadow()
 {
 	m_show_shadow = (m_check_show_shadow.GetCheck() == BST_CHECKED);
+	theApp.WriteProfileInt(_T("setting"), _T("show shadow"), m_show_shadow);
 	Invalidate();
 }
 
@@ -373,11 +388,9 @@ void CTestD2DrawTextDlg::OnSize(UINT nType, int cx, int cy)
 	m_static_text_area.GetWindowRect(m_text_area);
 	ScreenToClient(m_text_area);
 
-	//m_d2dc.on_size_changed(m_text_area.Width(), m_text_area.Height());
 	m_d2dc.on_size_changed(cx, cy);
 
 	Invalidate();
-	//InvalidateRect(m_text_area, FALSE);
 }
 
 BOOL CTestD2DrawTextDlg::OnEraseBkgnd(CDC* pDC)
@@ -391,8 +404,9 @@ LRESULT CTestD2DrawTextDlg::on_message_CSCSliderCtrl(WPARAM wParam, LPARAM lPara
 {
 	CSCSliderCtrlMsg* msg = (CSCSliderCtrlMsg*)wParam;
 
-	if (msg->pThis = &m_slider_font_size)
+	if (msg->pThis == &m_slider_font_size)
 	{
+		m_static_font_size.set_text_value(_T("%d"), msg->pos);
 		theApp.WriteProfileInt(_T("setting"), _T("font size"), msg->pos);
 		Invalidate();
 	}
