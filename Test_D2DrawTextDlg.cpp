@@ -69,6 +69,7 @@ void CTestD2DrawTextDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_SLIDER_FONT_SIZE, m_slider_font_size);
 	DDX_Control(pDX, IDC_COMBO_BACK_IMAGE, m_combo_back_image);
 	DDX_Control(pDX, IDC_STATIC_FONT_SIZE, m_static_font_size);
+	DDX_Control(pDX, IDC_CHECK_STRETCH, m_check_stretch);
 }
 
 BEGIN_MESSAGE_MAP(CTestD2DrawTextDlg, CDialogEx)
@@ -92,6 +93,7 @@ BEGIN_MESSAGE_MAP(CTestD2DrawTextDlg, CDialogEx)
 	ON_WM_ERASEBKGND()
 	ON_REGISTERED_MESSAGE(Message_CSCSliderCtrl, &CTestD2DrawTextDlg::on_message_CSCSliderCtrl)
 	ON_CBN_SELCHANGE(IDC_COMBO_BACK_IMAGE, &CTestD2DrawTextDlg::OnCbnSelchangeComboBackImage)
+	ON_BN_CLICKED(IDC_CHECK_STRETCH, &CTestD2DrawTextDlg::OnBnClickedCheckStretch)
 END_MESSAGE_MAP()
 
 
@@ -165,6 +167,7 @@ BOOL CTestD2DrawTextDlg::OnInitDialog()
 
 	//배경이미지 파일들 로딩
 	m_combo_back_image.set_line_height(14);
+	m_combo_back_image.set_back_color(Gdiplus::Color::White);
 	std::deque<CString> back_image_files = find_all_files(get_exe_directory(true) + _T("back_image"), _T("*"), FILE_EXTENSION_IMAGE);
 	for (int i = 0; i < back_image_files.size(); i++)
 	{
@@ -248,7 +251,7 @@ void CTestD2DrawTextDlg::OnPaint()
 
 		//배경그림을 그리고 (비율을 유지한 채 가로 또는 세로에 맞게 확대/축소하여 그림)
 		if (m_back_index >= 0)
-			m_img_back[m_back_index]->draw(d2dc, CRect_to_d2Rect(m_text_area), eSCD2Image_DRAW_MODE::draw_mode_stretch);
+			m_img_back[m_back_index]->draw(d2dc, CRect_to_d2Rect(m_text_area), m_draw_mode);
 
 		draw_rect(d2dc, m_text_area, Gdiplus::Color::DimGray);
 
@@ -421,5 +424,15 @@ void CTestD2DrawTextDlg::OnCbnSelchangeComboBackImage()
 		return;
 
 	theApp.WriteProfileInt(_T("setting"), _T("back_index"), m_back_index);
+	Invalidate();
+}
+
+void CTestD2DrawTextDlg::OnBnClickedCheckStretch()
+{
+	if (m_check_stretch.GetCheck() == BST_CHECKED)
+		m_draw_mode = eSCD2Image_DRAW_MODE::draw_mode_stretch;
+	else
+		m_draw_mode = eSCD2Image_DRAW_MODE::draw_mode_zoom;
+
 	Invalidate();
 }

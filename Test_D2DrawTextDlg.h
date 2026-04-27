@@ -33,6 +33,7 @@ public:
 
 	int					m_back_index = -1;
 	std::deque<std::unique_ptr<CSCD2Image>>	m_img_back;
+	eSCD2Image_DRAW_MODE	m_draw_mode = eSCD2Image_DRAW_MODE::draw_mode_zoom;
 
 	LRESULT				on_message_CSCSliderCtrl(WPARAM wParam, LPARAM lParam);
 
@@ -80,4 +81,6 @@ public:
 	CSCComboBox m_combo_back_image;
 	afx_msg void OnCbnSelchangeComboBackImage();
 	CSCStatic m_static_font_size;
+	CButton m_check_stretch;
+	afx_msg void OnBnClickedCheckStretch();
 };
