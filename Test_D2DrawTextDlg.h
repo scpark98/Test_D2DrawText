@@ -37,6 +37,9 @@ public:
 
 	LRESULT				on_message_CSCSliderCtrl(WPARAM wParam, LPARAM lParam);
 
+	void				paint_scene(ID2D1DeviceContext* d2dc);
+	HRESULT				save_scene_png(const CString& path);
+
 // 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_TEST_D2DRAWTEXT_DIALOG };
@@ -83,4 +86,5 @@ public:
 	CSCStatic m_static_font_size;
 	CButton m_check_stretch;
 	afx_msg void OnBnClickedCheckStretch();
+	afx_msg void OnBnClickedButtonSave();
 };

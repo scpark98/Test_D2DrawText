@@ -1,5 +1,5 @@
-
-// Test_D2DrawTextDlg.cpp: ±¸Çö ÆÄÀÏ
+ï»¿
+// Test_D2DrawTextDlg.cpp: êµ¬í˜„ íŒŒì¼
 //
 
 #include "pch.h"
@@ -15,22 +15,22 @@
 #endif
 
 
-// ÀÀ¿ë ÇÁ·Î±×·¥ Á¤º¸¿¡ »ç¿ëµÇ´Â CAboutDlg ´ëÈ­ »óÀÚÀÔ´Ï´Ù.
+// ì‘ìš© í”„ë¡œê·¸ë¨ ì •ë³´ì— ì‚¬ìš©ë˜ëŠ” CAboutDlg ëŒ€í™” ìƒìì…ë‹ˆë‹¤.
 
 class CAboutDlg : public CDialogEx
 {
 public:
 	CAboutDlg();
 
-// ´ëÈ­ »óÀÚ µ¥ÀÌÅÍÀÔ´Ï´Ù.
+// ëŒ€í™” ìƒì ë°ì´í„°ì…ë‹ˆë‹¤.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_ABOUTBOX };
 #endif
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Áö¿øÀÔ´Ï´Ù.
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ì§€ì›ì…ë‹ˆë‹¤.
 
-// ±¸ÇöÀÔ´Ï´Ù.
+// êµ¬í˜„ì…ë‹ˆë‹¤.
 protected:
 	DECLARE_MESSAGE_MAP()
 };
@@ -48,7 +48,7 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CTestD2DrawTextDlg ´ëÈ­ »óÀÚ
+// CTestD2DrawTextDlg ëŒ€í™” ìƒì
 
 
 
@@ -94,18 +94,19 @@ BEGIN_MESSAGE_MAP(CTestD2DrawTextDlg, CDialogEx)
 	ON_REGISTERED_MESSAGE(Message_CSCSliderCtrl, &CTestD2DrawTextDlg::on_message_CSCSliderCtrl)
 	ON_CBN_SELCHANGE(IDC_COMBO_BACK_IMAGE, &CTestD2DrawTextDlg::OnCbnSelchangeComboBackImage)
 	ON_BN_CLICKED(IDC_CHECK_STRETCH, &CTestD2DrawTextDlg::OnBnClickedCheckStretch)
+	ON_BN_CLICKED(IDC_BUTTON_SAVE, &CTestD2DrawTextDlg::OnBnClickedButtonSave)
 END_MESSAGE_MAP()
 
 
-// CTestD2DrawTextDlg ¸Ş½ÃÁö Ã³¸®±â
+// CTestD2DrawTextDlg ë©”ì‹œì§€ ì²˜ë¦¬ê¸°
 
 BOOL CTestD2DrawTextDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	// ½Ã½ºÅÛ ¸Ş´º¿¡ "Á¤º¸..." ¸Ş´º Ç×¸ñÀ» Ãß°¡ÇÕ´Ï´Ù.
+	// ì‹œìŠ¤í…œ ë©”ë‰´ì— "ì •ë³´..." ë©”ë‰´ í•­ëª©ì„ ì¶”ê°€í•©ë‹ˆë‹¤.
 
-	// IDM_ABOUTBOX´Â ½Ã½ºÅÛ ¸í·É ¹üÀ§¿¡ ÀÖ¾î¾ß ÇÕ´Ï´Ù.
+	// IDM_ABOUTBOXëŠ” ì‹œìŠ¤í…œ ëª…ë ¹ ë²”ìœ„ì— ìˆì–´ì•¼ í•©ë‹ˆë‹¤.
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 
@@ -123,23 +124,23 @@ BOOL CTestD2DrawTextDlg::OnInitDialog()
 		}
 	}
 
-	// ÀÌ ´ëÈ­ »óÀÚÀÇ ¾ÆÀÌÄÜÀ» ¼³Á¤ÇÕ´Ï´Ù.  ÀÀ¿ë ÇÁ·Î±×·¥ÀÇ ÁÖ Ã¢ÀÌ ´ëÈ­ »óÀÚ°¡ ¾Æ´Ò °æ¿ì¿¡´Â
-	//  ÇÁ·¹ÀÓ¿öÅ©°¡ ÀÌ ÀÛ¾÷À» ÀÚµ¿À¸·Î ¼öÇàÇÕ´Ï´Ù.
-	SetIcon(m_hIcon, TRUE);			// Å« ¾ÆÀÌÄÜÀ» ¼³Á¤ÇÕ´Ï´Ù.
-	SetIcon(m_hIcon, FALSE);		// ÀÛÀº ¾ÆÀÌÄÜÀ» ¼³Á¤ÇÕ´Ï´Ù.
+	// ì´ ëŒ€í™” ìƒìì˜ ì•„ì´ì½˜ì„ ì„¤ì •í•©ë‹ˆë‹¤.  ì‘ìš© í”„ë¡œê·¸ë¨ì˜ ì£¼ ì°½ì´ ëŒ€í™” ìƒìê°€ ì•„ë‹ ê²½ìš°ì—ëŠ”
+	//  í”„ë ˆì„ì›Œí¬ê°€ ì´ ì‘ì—…ì„ ìë™ìœ¼ë¡œ ìˆ˜í–‰í•©ë‹ˆë‹¤.
+	SetIcon(m_hIcon, TRUE);			// í° ì•„ì´ì½˜ì„ ì„¤ì •í•©ë‹ˆë‹¤.
+	SetIcon(m_hIcon, FALSE);		// ì‘ì€ ì•„ì´ì½˜ì„ ì„¤ì •í•©ë‹ˆë‹¤.
 
-	// TODO: ¿©±â¿¡ Ãß°¡ ÃÊ±âÈ­ ÀÛ¾÷À» Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ì¶”ê°€ ì´ˆê¸°í™” ì‘ì—…ì„ ì¶”ê°€í•©ë‹ˆë‹¤.
 	m_resize.Create(this);
 	m_resize.Add(IDC_STATIC_TEXT_AREA, 0, 0, 100, 100);
 
 	//m_d2dc.init(m_static_text_area.m_hWnd);
 	m_d2dc.init(m_hWnd);
 
-	m_edit_text.set_text(theApp.GetProfileString(_T("setting"), _T("text"), _T("ÇÑ±Û ÅØ½ºÆ®\r\nSecond Line.")));
+	m_edit_text.set_text(theApp.GetProfileString(_T("setting"), _T("text"), _T("í•œê¸€ í…ìŠ¤íŠ¸\r\nSecond Line.")));
 
 	m_combo_font.set_as_font_combo();
 	m_combo_font.set_line_height(14);
-	CString font_name = theApp.GetProfileString(_T("setting"), _T("font name"), _T("¸¼Àº °íµñ"));
+	CString font_name = theApp.GetProfileString(_T("setting"), _T("font name"), _T("ë§‘ì€ ê³ ë”•"));
 	m_combo_font.SelectString(-1, font_name);
 
 	int font_size = theApp.GetProfileInt(_T("setting"), _T("font size"), 48);
@@ -165,15 +166,15 @@ BOOL CTestD2DrawTextDlg::OnInitDialog()
 	CheckDlgButton(IDC_RADIO_VCENTER, m_valign == DT_VCENTER ? BST_CHECKED : BST_UNCHECKED);
 	CheckDlgButton(IDC_RADIO_BOTTOM, m_valign == DT_BOTTOM ? BST_CHECKED : BST_UNCHECKED);
 
-	//¹è°æÀÌ¹ÌÁö ÆÄÀÏµé ·Îµù
+	//ë°°ê²½ì´ë¯¸ì§€ íŒŒì¼ë“¤ ë¡œë”©
 	m_combo_back_image.set_line_height(14);
 	m_combo_back_image.set_back_color(Gdiplus::Color::White);
 	std::deque<CString> back_image_files = find_all_files(get_exe_directory(true) + _T("back_image"), _T("*"), FILE_EXTENSION_IMAGE);
 	for (int i = 0; i < back_image_files.size(); i++)
 	{
-		//static local º¯¼ö·Î ¼±¾ğÇÏ¿© m_img_back.push_back(img); ÇÏ°ÔµÇ¸é shallow copyµÇ¹Ç·Î ¼Ò¸ê ½Ã ¿¡·¯°¡ ¹ß»ıÇÑ´Ù.
-		//¹İµå½Ã new·Î ÇÒ´ç¹Ş¾Æ¼­ ³Ö°í ÇÁ·Î±×·¥ Á¾·á ½Ã ÇØÁ¦ÇÒ °Í.
-		//std::make_unique·Î º¯°æ ÈÄ Á¾·á ½Ã ÇØÁ¦ ÀÛ¾÷ ¶ÇÇÑ ºÒÇÊ¿äÇÔ.
+		//static local ë³€ìˆ˜ë¡œ ì„ ì–¸í•˜ì—¬ m_img_back.push_back(img); í•˜ê²Œë˜ë©´ shallow copyë˜ë¯€ë¡œ ì†Œë©¸ ì‹œ ì—ëŸ¬ê°€ ë°œìƒí•œë‹¤.
+		//ë°˜ë“œì‹œ newë¡œ í• ë‹¹ë°›ì•„ì„œ ë„£ê³  í”„ë¡œê·¸ë¨ ì¢…ë£Œ ì‹œ í•´ì œí•  ê²ƒ.
+		//std::make_uniqueë¡œ ë³€ê²½ í›„ ì¢…ë£Œ ì‹œ í•´ì œ ì‘ì—… ë˜í•œ ë¶ˆí•„ìš”í•¨.
 		auto img = std::make_unique<CSCD2Image>();
 		HRESULT hr = img->load(m_d2dc.get_WICFactory(), m_d2dc.get_d2dc(), back_image_files[i]);
 		if (hr == S_OK)
@@ -187,7 +188,7 @@ BOOL CTestD2DrawTextDlg::OnInitDialog()
 
 	RestoreWindowPosition(&theApp, this);	RestoreWindowPosition(&theApp, this);
 
-	return TRUE;  // Æ÷Ä¿½º¸¦ ÄÁÆ®·Ñ¿¡ ¼³Á¤ÇÏÁö ¾ÊÀ¸¸é TRUE¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+	return TRUE;  // í¬ì»¤ìŠ¤ë¥¼ ì»¨íŠ¸ë¡¤ì— ì„¤ì •í•˜ì§€ ì•Šìœ¼ë©´ TRUEë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
 }
 
 void CTestD2DrawTextDlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -203,19 +204,19 @@ void CTestD2DrawTextDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 }
 
-// ´ëÈ­ »óÀÚ¿¡ ÃÖ¼ÒÈ­ ´ÜÃß¸¦ Ãß°¡ÇÒ °æ¿ì ¾ÆÀÌÄÜÀ» ±×¸®·Á¸é
-//  ¾Æ·¡ ÄÚµå°¡ ÇÊ¿äÇÕ´Ï´Ù.  ¹®¼­/ºä ¸ğµ¨À» »ç¿ëÇÏ´Â MFC ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ °æ¿ì¿¡´Â
-//  ÇÁ·¹ÀÓ¿öÅ©¿¡¼­ ÀÌ ÀÛ¾÷À» ÀÚµ¿À¸·Î ¼öÇàÇÕ´Ï´Ù.
+// ëŒ€í™” ìƒìì— ìµœì†Œí™” ë‹¨ì¶”ë¥¼ ì¶”ê°€í•  ê²½ìš° ì•„ì´ì½˜ì„ ê·¸ë¦¬ë ¤ë©´
+//  ì•„ë˜ ì½”ë“œê°€ í•„ìš”í•©ë‹ˆë‹¤.  ë¬¸ì„œ/ë·° ëª¨ë¸ì„ ì‚¬ìš©í•˜ëŠ” MFC ì• í”Œë¦¬ì¼€ì´ì…˜ì˜ ê²½ìš°ì—ëŠ”
+//  í”„ë ˆì„ì›Œí¬ì—ì„œ ì´ ì‘ì—…ì„ ìë™ìœ¼ë¡œ ìˆ˜í–‰í•©ë‹ˆë‹¤.
 
 void CTestD2DrawTextDlg::OnPaint()
 {
 	if (IsIconic())
 	{
-		CPaintDC dc(this); // ±×¸®±â¸¦ À§ÇÑ µğ¹ÙÀÌ½º ÄÁÅØ½ºÆ®ÀÔ´Ï´Ù.
+		CPaintDC dc(this); // ê·¸ë¦¬ê¸°ë¥¼ ìœ„í•œ ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ì…ë‹ˆë‹¤.
 
 		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
 
-		// Å¬¶óÀÌ¾ğÆ® »ç°¢Çü¿¡¼­ ¾ÆÀÌÄÜÀ» °¡¿îµ¥¿¡ ¸ÂÃä´Ï´Ù.
+		// í´ë¼ì´ì–¸íŠ¸ ì‚¬ê°í˜•ì—ì„œ ì•„ì´ì½˜ì„ ê°€ìš´ë°ì— ë§ì¶¥ë‹ˆë‹¤.
 		int cxIcon = GetSystemMetrics(SM_CXICON);
 		int cyIcon = GetSystemMetrics(SM_CYICON);
 		CRect rect;
@@ -223,49 +224,18 @@ void CTestD2DrawTextDlg::OnPaint()
 		int x = (rect.Width() - cxIcon + 1) / 2;
 		int y = (rect.Height() - cyIcon + 1) / 2;
 
-		// ¾ÆÀÌÄÜÀ» ±×¸³´Ï´Ù.
+		// ì•„ì´ì½˜ì„ ê·¸ë¦½ë‹ˆë‹¤.
 		dc.DrawIcon(x, y, m_hIcon);
 	}
 	else
 	{
-		//ÀÌ ÇÑÁÙÀ» ¾È½áÁÖ¸é ÄÁÆ®·ÑÀ» Å¬¸¯ÇØµµ È­¸éÀÌ °»½ÅµÇÁö ¾Ê´Â´Ù.
+		//ì´ í•œì¤„ì„ ì•ˆì¨ì£¼ë©´ ì»¨íŠ¸ë¡¤ì„ í´ë¦­í•´ë„ í™”ë©´ì´ ê°±ì‹ ë˜ì§€ ì•ŠëŠ”ë‹¤.
 		CPaintDC dc(this);
 
-
-		CRect rc;
-
-		GetClientRect(rc);
-
 		ID2D1DeviceContext* d2dc = m_d2dc.get_d2dc();
-		D2D1_SIZE_F dc_size = m_d2dc.get_size();
 
 		d2dc->BeginDraw();
-		d2dc->SetTransform(D2D1::Matrix3x2F::Identity());
-
-		//blackÀ¸·Î Ä¥ÇÑ ÈÄ
-		//d2dc->Clear(D2D1::ColorF(D2D1::ColorF::White));
-		d2dc->Clear(get_sys_d2color(COLOR_3DFACE));
-
-		ID2D1SolidColorBrush* br;
-		d2dc->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Red), &br);
-
-		//¹è°æ±×¸²À» ±×¸®°í (ºñÀ²À» À¯ÁöÇÑ Ã¤ °¡·Î ¶Ç´Â ¼¼·Î¿¡ ¸Â°Ô È®´ë/Ãà¼ÒÇÏ¿© ±×¸²)
-		if (m_back_index >= 0)
-			m_img_back[m_back_index]->draw(d2dc, CRect_to_d2Rect(m_text_area), m_draw_mode);
-
-		draw_rect(d2dc, m_text_area, Gdiplus::Color::DimGray);
-
-		m_text_rect = draw_text(d2dc, m_text_area, m_edit_text.get_text(), m_combo_font.get_cur_sel_text(),
-								(float)m_slider_font_size.GetPos(), DWRITE_FONT_WEIGHT_NORMAL,
-								Gdiplus::Color::Red,
-								Gdiplus::Color::Transparent,
-								Gdiplus::Color::Black,
-								Gdiplus::Color(128, 255, 255, 0),
-								0.0f,
-								m_align | m_valign,
-								m_show_text, m_show_shadow);
-		draw_rect(d2dc, m_text_rect, Gdiplus::Color::Red);
-
+		paint_scene(d2dc);
 		HRESULT hr = d2dc->EndDraw();
 
 		if (SUCCEEDED(hr))
@@ -273,8 +243,31 @@ void CTestD2DrawTextDlg::OnPaint()
 	}
 }
 
-// »ç¿ëÀÚ°¡ ÃÖ¼ÒÈ­µÈ Ã¢À» ²ô´Â µ¿¾È¿¡ Ä¿¼­°¡ Ç¥½ÃµÇµµ·Ï ½Ã½ºÅÛ¿¡¼­
-//  ÀÌ ÇÔ¼ö¸¦ È£ÃâÇÕ´Ï´Ù.
+void CTestD2DrawTextDlg::paint_scene(ID2D1DeviceContext* d2dc)
+{
+	d2dc->SetTransform(D2D1::Matrix3x2F::Identity());
+	//d2dc->Clear(get_sys_d2color(COLOR_3DFACE));
+
+	//ë°°ê²½ê·¸ë¦¼ì„ ê·¸ë¦¬ê³  (ë¹„ìœ¨ì„ ìœ ì§€í•œ ì±„ ê°€ë¡œ ë˜ëŠ” ì„¸ë¡œì— ë§ê²Œ í™•ëŒ€/ì¶•ì†Œí•˜ì—¬ ê·¸ë¦¼)
+	if (m_back_index >= 0)
+		m_img_back[m_back_index]->draw(d2dc, CRect_to_d2Rect(m_text_area), m_draw_mode);
+
+	draw_rect(d2dc, m_text_area, Gdiplus::Color::DimGray);
+
+	m_text_rect = draw_text(d2dc, m_text_area, m_edit_text.get_text(), m_combo_font.get_cur_sel_text(),
+							(float)m_slider_font_size.GetPos(), DWRITE_FONT_WEIGHT_NORMAL,
+							Gdiplus::Color::Red,
+							Gdiplus::Color::Blue,
+							Gdiplus::Color::Black,
+							Gdiplus::Color::Transparent,//(128, 255, 255, 0),
+							2.0f,
+							m_align | m_valign,
+							m_show_text, m_show_shadow);
+	draw_rect(d2dc, m_text_rect, Gdiplus::Color::Red);
+}
+
+// ì‚¬ìš©ìê°€ ìµœì†Œí™”ëœ ì°½ì„ ë„ëŠ” ë™ì•ˆì— ì»¤ì„œê°€ í‘œì‹œë˜ë„ë¡ ì‹œìŠ¤í…œì—ì„œ
+//  ì´ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•©ë‹ˆë‹¤.
 HCURSOR CTestD2DrawTextDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
@@ -287,9 +280,9 @@ void CTestD2DrawTextDlg::OnBnClickedOk()
 
 void CTestD2DrawTextDlg::OnBnClickedCancel()
 {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ì»¨íŠ¸ë¡¤ ì•Œë¦¼ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 	
-	//std::make_unique·Î ÇÒ´ç¹Ş¾ÒÀ¸¹Ç·Î Á÷Á¢ ÇØÁ¦ÇÏ´Â ÄÚµå´Â ºÒÇÊ¿äÇÏ´Ù.
+	//std::make_uniqueë¡œ í• ë‹¹ë°›ì•˜ìœ¼ë¯€ë¡œ ì§ì ‘ í•´ì œí•˜ëŠ” ì½”ë“œëŠ” ë¶ˆí•„ìš”í•˜ë‹¤.
 	//for (int i = 0; i < m_img_back.size(); i++)
 	//{
 	//	delete m_img_back[i];
@@ -372,7 +365,7 @@ void CTestD2DrawTextDlg::OnWindowPosChanged(WINDOWPOS* lpwndpos)
 {
 	CDialogEx::OnWindowPosChanged(lpwndpos);
 
-	// TODO: ¿©±â¿¡ ¸Ş½ÃÁö Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ë©”ì‹œì§€ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 	if (m_d2dc.get_d2dc() == nullptr)
 		return;
 
@@ -392,7 +385,7 @@ void CTestD2DrawTextDlg::OnSize(UINT nType, int cx, int cy)
 {
 	CDialogEx::OnSize(nType, cx, cy);
 
-	// TODO: ¿©±â¿¡ ¸Ş½ÃÁö Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ë©”ì‹œì§€ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 	if (m_static_text_area.m_hWnd == NULL)
 		return;
 
@@ -406,7 +399,7 @@ void CTestD2DrawTextDlg::OnSize(UINT nType, int cx, int cy)
 
 BOOL CTestD2DrawTextDlg::OnEraseBkgnd(CDC* pDC)
 {
-	// TODO: ¿©±â¿¡ ¸Ş½ÃÁö Ã³¸®±â ÄÚµå¸¦ Ãß°¡ ¹×/¶Ç´Â ±âº»°ªÀ» È£ÃâÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ë©”ì‹œì§€ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€ ë°/ë˜ëŠ” ê¸°ë³¸ê°’ì„ í˜¸ì¶œí•©ë‹ˆë‹¤.
 	return FALSE;
 	return CDialogEx::OnEraseBkgnd(pDC);
 }
@@ -443,4 +436,84 @@ void CTestD2DrawTextDlg::OnBnClickedCheckStretch()
 		m_draw_mode = eSCD2Image_DRAW_MODE::draw_mode_zoom;
 
 	Invalidate();
+}
+
+HRESULT CTestD2DrawTextDlg::save_scene_png(const CString& path)
+{
+	ID2D1DeviceContext* d2dc = m_d2dc.get_d2dc();
+	if (d2dc == nullptr)
+		return E_FAIL;
+
+	D2D1_SIZE_F sz_f = d2dc->GetSize();
+	D2D1_SIZE_U sz = { (UINT)sz_f.width, (UINT)sz_f.height };
+	if (sz.width == 0 || sz.height == 0)
+		return E_FAIL;
+
+	//swapchain back buffer ëŠ” Present í›„ ì •ì˜ë˜ì§€ ì•Šìœ¼ë¯€ë¡œ ë³„ë„ offscreen target ì— ë‹¤ì‹œ ê·¸ë¦°ë‹¤.
+	ComPtr<ID2D1Bitmap1> offscreen;
+	D2D1_BITMAP_PROPERTIES1 target_props = D2D1::BitmapProperties1(
+		D2D1_BITMAP_OPTIONS_TARGET,
+		D2D1::PixelFormat(DXGI_FORMAT_B8G8R8A8_UNORM, D2D1_ALPHA_MODE_PREMULTIPLIED));
+	HRESULT hr = d2dc->CreateBitmap(sz, nullptr, 0, &target_props, &offscreen);
+	if (FAILED(hr))
+		return hr;
+
+	ComPtr<ID2D1Image> prev_target;
+	d2dc->GetTarget(&prev_target);
+
+	d2dc->SetTarget(offscreen.Get());
+	d2dc->BeginDraw();
+	paint_scene(d2dc);
+	hr = d2dc->EndDraw();
+	d2dc->SetTarget(prev_target.Get());
+	if (FAILED(hr))
+		return hr;
+
+	ComPtr<ID2D1Bitmap1> cpu_bitmap;
+	D2D1_BITMAP_PROPERTIES1 cpu_props = D2D1::BitmapProperties1(
+		D2D1_BITMAP_OPTIONS_CPU_READ | D2D1_BITMAP_OPTIONS_CANNOT_DRAW,
+		D2D1::PixelFormat(DXGI_FORMAT_B8G8R8A8_UNORM, D2D1_ALPHA_MODE_PREMULTIPLIED));
+	hr = d2dc->CreateBitmap(sz, nullptr, 0, &cpu_props, &cpu_bitmap);
+	if (FAILED(hr))
+		return hr;
+
+	D2D1_POINT_2U dst = { 0, 0 };
+	D2D1_RECT_U   src = { 0, 0, sz.width, sz.height };
+	hr = cpu_bitmap->CopyFromBitmap(&dst, offscreen.Get(), &src);
+	if (FAILED(hr))
+		return hr;
+
+	D2D1_MAPPED_RECT mapped = {};
+	hr = cpu_bitmap->Map(D2D1_MAP_OPTIONS_READ, &mapped);
+	if (FAILED(hr))
+		return hr;
+
+	IWICImagingFactory2* wic = m_d2dc.get_WICFactory();
+
+	ComPtr<IWICBitmapEncoder> encoder;
+	wic->CreateEncoder(GUID_ContainerFormatPng, nullptr, &encoder);
+
+	ComPtr<IWICStream> stream;
+	wic->CreateStream(&stream);
+	stream->InitializeFromFilename(path, GENERIC_WRITE);
+	encoder->Initialize(stream.Get(), WICBitmapEncoderNoCache);
+
+	ComPtr<IWICBitmapFrameEncode> frame;
+	encoder->CreateNewFrame(&frame, nullptr);
+	frame->Initialize(nullptr);
+	frame->SetSize(sz.width, sz.height);
+
+	WICPixelFormatGUID format = GUID_WICPixelFormat32bppBGRA;
+	frame->SetPixelFormat(&format);
+	frame->WritePixels(sz.height, mapped.pitch, mapped.pitch * sz.height, mapped.bits);
+	frame->Commit();
+	encoder->Commit();
+
+	cpu_bitmap->Unmap();
+	return S_OK;
+}
+
+void CTestD2DrawTextDlg::OnBnClickedButtonSave()
+{
+	save_scene_png(_T("D:\\test_d2drawtext.png"));
 }
