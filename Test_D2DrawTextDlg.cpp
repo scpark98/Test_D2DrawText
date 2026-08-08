@@ -300,7 +300,7 @@ void CTestD2DrawTextDlg::OnEnChangeEditText()
 void CTestD2DrawTextDlg::OnCbnSelchangeComboFont()
 {
 	CString font_name = m_combo_font.get_cur_sel_text();
-	trace(font_name);
+	sctrace(font_name);
 	theApp.WriteProfileString(_T("setting"), _T("font name"), font_name);
 	Invalidate();
 }
